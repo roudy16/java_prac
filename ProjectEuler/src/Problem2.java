@@ -2,7 +2,8 @@
  * Problem 2 from https://projecteuler.net/problem=2
  */
 
-import java.util.function.*;
+import java.util.function.IntPredicate;
+import java.lang.Integer;
 
 /* The goal is to find the sum of all even Fibinacci numbers that don't exceed
  * 4000000. I want to process the sequence as it is generated to save some space.
@@ -13,7 +14,7 @@ public class Problem2 {
     public static IntPredicate isEven = (val) -> {return val % 2 == 0; };
 
     public interface SeqGen {
-        public int next();
+        public Integer next();
     }
 
     public interface SeqConsumer {
@@ -24,32 +25,48 @@ public class Problem2 {
     public class SeqFilter implements SeqGen {
         private SeqGen m_gen;
         private IntPredicate m_filter;
+        private Integer next_val = null;
 
         public SeqFilter(SeqGen gen, IntPredicate filter) {
             m_gen = gen;
             m_filter = filter;
         }
 
-        public int next() {
-            int retval = m_gen.next();
-            while (!m_filter.test(retval)) {
-                retval = m_gen.next();
-            }
-            return retval;
+        public Integer next() {
+        	seek_next();
+            return next_val;
+        }
+        
+        private boolean seek_next() {
+        	next_val = m_gen.next();
+        	while (next_val != null) {
+        		// we found a next value for the filtered sequence
+        		if (m_filter.test(next_val.intValue())) {
+        			return true;
+        		}
+
+        		next_val = m_gen.next();
+        	}
+        	
+        	// no next value was found
+        	return false;
         }
     }
 
     public class SeqAdder implements SeqConsumer {
-        private int sum = 0;
+        private int acc;
+        private int last_result;
         public void Process(SeqGen gen, IntPredicate sentinal) {
-            int val = gen.next();
-            while (!sentinal.test(val)) {
-                sum += val;
+        	acc = 0;
+            Integer val = gen.next();
+            while (val != null && !sentinal.test(val.intValue())) {
+                acc += val.intValue();
                 val = gen.next();
             }
+            last_result = acc;
         }
 
-        public int GetResult() { return sum; }
+        public int GetResult() { return last_result; }
     }
 
     public class FibGen implements SeqGen{
@@ -60,10 +77,10 @@ public class Problem2 {
             first = 0;
             second = 1;
         }
-        public int next() {
-            int retval = first + second;
+        public Integer next() {
+            Integer retval = first + second;
             first = second;
-            second = retval;
+            second = retval.intValue();
             return retval;
         }
     }
@@ -85,7 +102,8 @@ public class Problem2 {
         // Adds the numbers in the Even Fibinacci sequence until a number greater than
         // 4000000 is seen in the sequence
         adder.Process(EvenFibs, (val) -> val > 4000000);
+        int evenFibSum = adder.GetResult();
 
-        System.out.println(adder.GetResult());
+        System.out.println(evenFibSum);
     }
 }
