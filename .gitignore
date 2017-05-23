@@ -1,11 +1,16 @@
 # vim garbage
 *.swp
+*.*~
 
 # IDE stuff
+# eclipse
 .metadata/
 */.classpath
 */.project
 */.settings/
+# intelliJ
+*/.idea/
+*.iml
 
 # Compiled class file
 *.class
