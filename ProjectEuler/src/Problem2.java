@@ -4,9 +4,9 @@
 
 import java.util.function.IntPredicate;
 
-import sequence.SeqAdder;
-import sequence.SeqGen;
+import sequence.IntSeqAdder;
 import sequence.IntSeqFilter;
+import sequence.SeqGen;
 import sequence.FibGen;
 
 /* The goal is to find the sum of all even Fibinacci numbers that don't exceed
@@ -25,7 +25,7 @@ public class Problem2 {
         SeqGen EvenFibs = new IntSeqFilter(Fibs, isEven);
 
         // A sequence consumer that sums the numbers in a sequence
-        SeqAdder adder = new SeqAdder();
+        IntSeqAdder adder = new IntSeqAdder();
 
         // Adds the numbers in the Even Fibinacci sequence until a number greater than
         // 4000000 is seen in the sequence

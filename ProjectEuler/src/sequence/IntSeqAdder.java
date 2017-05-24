@@ -1,6 +1,6 @@
 package sequence;
 
-public class SeqAdder implements SeqConsumer<Integer> {
+public class IntSeqAdder implements SeqConsumer<Integer> {
     private Integer $acc$; // just testing stupid '$' char usage in variable name
     private Integer last_result;
 
