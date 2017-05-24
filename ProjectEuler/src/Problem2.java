@@ -5,9 +5,8 @@
 import java.util.function.IntPredicate;
 
 import sequence.SeqAdder;
-import sequence.SeqConsumer;
 import sequence.SeqGen;
-import sequence.SeqFilter;
+import sequence.IntSeqFilter;
 import sequence.FibGen;
 
 /* The goal is to find the sum of all even Fibinacci numbers that don't exceed
@@ -20,18 +19,18 @@ public class Problem2 {
 
     public static void main (String[] args) {
         // A generator for Fibinacci numbers
-        SeqGen Fibs = new FibGen();
+        SeqGen Fibs = new FibGen(4000000);
 
         // A generator for only even Fibinacci numbers
-        SeqGen EvenFibs = new SeqFilter(Fibs, isEven);
+        SeqGen EvenFibs = new IntSeqFilter(Fibs, isEven);
 
         // A sequence consumer that sums the numbers in a sequence
-        SeqConsumer adder = new SeqAdder();
+        SeqAdder adder = new SeqAdder();
 
         // Adds the numbers in the Even Fibinacci sequence until a number greater than
         // 4000000 is seen in the sequence
-        adder.Process(EvenFibs, (val) -> val > 4000000);
-        int evenFibSum = adder.GetResult();
+        adder.Process(EvenFibs);
+        Integer evenFibSum = adder.GetResult();
 
         System.out.println(evenFibSum);
     }

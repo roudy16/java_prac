@@ -2,12 +2,12 @@ package sequence;
 
 import java.util.function.IntPredicate;
 
-public class SeqFilter implements SeqGen {
-    private SeqGen m_gen;
+public class IntSeqFilter implements SeqGen<Integer> {
+    private SeqGen<Integer> m_gen;
     private IntPredicate m_filter;
     private Integer next_val = null;
 
-    public SeqFilter(SeqGen gen, IntPredicate filter) {
+    public IntSeqFilter(SeqGen<Integer> gen, IntPredicate filter) {
         m_gen = gen;
         m_filter = filter;
     }
@@ -21,7 +21,7 @@ public class SeqFilter implements SeqGen {
         next_val = m_gen.next();
         while (next_val != null) {
             // we found a next value for the filtered sequence
-            if (m_filter.test(next_val.intValue())) {
+            if (m_filter.test(next_val)) {
                 return true;
             }
 

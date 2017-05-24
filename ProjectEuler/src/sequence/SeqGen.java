@@ -1,6 +1,6 @@
 package sequence;
 
-public interface SeqGen {
-    Integer next();
+public interface SeqGen<T extends Number> {
+    T next();
 }
 

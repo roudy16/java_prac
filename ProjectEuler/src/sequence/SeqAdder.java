@@ -1,19 +1,20 @@
 package sequence;
 
-import java.util.function.IntPredicate;
+public class SeqAdder implements SeqConsumer<Integer> {
+    private Integer $acc$; // just testing stupid '$' char usage in variable name
+    private Integer last_result;
 
-public class SeqAdder implements SeqConsumer {
-    private int $acc$; // just testing stupid '$' char usage in variable name
-    private int last_result;
-    public void Process(SeqGen gen, IntPredicate sentinel) {
-        $acc$ = 0;
+    public void Process(SeqGen<Integer> gen) {
         Integer val = gen.next();
-        while (val != null && !sentinel.test(val.intValue())) {
-            $acc$ += val.intValue();
+        if (val != null) {
+            $acc$ = new Integer(0);
+        }
+        while (val != null) {
+            $acc$ += val;
             val = gen.next();
         }
         last_result = $acc$;
     }
 
-    public int GetResult() { return last_result; }
+    public Integer GetResult() { return last_result; }
 }
