@@ -11,14 +11,14 @@ import java.lang.Integer;
  * using the numbers that pass the filter as input.
  */
 public class Problem2 {
-    public static IntPredicate isEven = (val) -> {return val % 2 == 0; };
+    public static IntPredicate isEven = (val) -> val % 2 == 0;
 
     public interface SeqGen {
         public Integer next();
     }
 
     public interface SeqConsumer {
-        public void Process(SeqGen gen, IntPredicate sentinal);
+        public void Process(SeqGen gen, IntPredicate sentinel);
         public int GetResult();
     }
 
@@ -56,10 +56,10 @@ public class Problem2 {
     public class SeqAdder implements SeqConsumer {
         private int $acc$; // just testing stupid '$' char usage in variable name
         private int last_result;
-        public void Process(SeqGen gen, IntPredicate sentinal) {
+        public void Process(SeqGen gen, IntPredicate sentinel) {
         	$acc$ = 0;
             Integer val = gen.next();
-            while (val != null && !sentinal.test(val.intValue())) {
+            while (val != null && !sentinel.test(val.intValue())) {
                 $acc$ += val.intValue();
                 val = gen.next();
             }
