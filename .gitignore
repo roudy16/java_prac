@@ -9,6 +9,7 @@
 */.project
 */.settings/
 *.recommenders
+*.checkstyle
 # intelliJ
 */.idea/
 *.iml
