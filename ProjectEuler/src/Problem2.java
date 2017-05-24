@@ -19,10 +19,10 @@ public class Problem2 {
 
     public static void main (String[] args) {
         // A generator for Fibinacci numbers
-        SeqGen Fibs = new FibGen(4000000);
+        SeqGen<Integer> Fibs = new FibGen(4000000);
 
         // A generator for only even Fibinacci numbers
-        SeqGen EvenFibs = new IntSeqFilter(Fibs, isEven);
+        SeqGen<Integer> EvenFibs = new IntSeqFilter(Fibs, isEven);
 
         // A sequence consumer that sums the numbers in a sequence
         IntSeqAdder adder = new IntSeqAdder();
