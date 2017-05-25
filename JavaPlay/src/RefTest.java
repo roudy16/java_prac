@@ -23,8 +23,8 @@ public class RefTest {
 
     private static String ChangeWordFoo(String word) {
         word = "Foo";
-        String newWord = new String("Somtin");
-        return newWord;
+        word = new String("Somtin");
+        return word;
     }
 
     public static void main(String[] args) {
