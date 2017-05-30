@@ -31,11 +31,11 @@ public class RequestHandler implements Runnable {
             final String reqContent = in.readLine();
 
             if (reqContent != null && !"".equals(reqContent)) {
-                final UUID reqID = UUID.randomUUID();
-                final RequestResult res = processReq(reqContent, reqID);
+                final Request req = new Request(reqContent);
+                final RequestResult res = processReq(req);
                 
                 if (res.getErrCode() != 0) {
-                    System.out.println("Error processing request ID: " + reqID.toString()
+                    System.out.println("Error processing request ID: " + req.getID().toString()
                                       + " Err: " + Integer.toString(res.getErrCode()));
                 }
                 
@@ -66,11 +66,14 @@ public class RequestHandler implements Runnable {
         System.out.println(sortedNums);
     }
 
-    private RequestResult processReq(String reqContent, final UUID reqID) {
-        System.out.println("Processing request ID: " + reqID.toString() + " on thread: "
-                          + Thread.currentThread().getName() + " : " + reqContent);
+    private RequestResult processReq(Request req) {
+        final String content = req.getContent();
+        final UUID reqID = req.getID();
 
-        final String[] reqWords = reqContent.split(" ");
+        System.out.println("Processing request ID: " + reqID.toString() + " on thread: "
+                          + Thread.currentThread().getName() + " : " + content);
+
+        final String[] reqWords = content.split(" ");
 
         if (reqWords.length < 2) {
             return new RequestResult(ERROR + " request did not contain minimum <ACTION> <SIZE>", -1);
@@ -104,6 +107,24 @@ public class RequestHandler implements Runnable {
         }
 
         return new RequestResult(response, retCode);
+    }
+
+    private final class Request {
+        private final String content;
+        private final UUID id;
+        
+        private Request(String data) {
+            content = data;
+            id = UUID.randomUUID();
+        }
+        
+        private String getContent() {
+            return content;
+        }
+        
+        private UUID getID() {
+            return id;
+        }
     }
 
     private final class RequestResult {
