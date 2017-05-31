@@ -1,0 +1,3 @@
+spawn 3
+show
+sort 5
