@@ -6,6 +6,7 @@ TERM=xterm
 
 PROJ_BIN=./bin/
 PROJ_SRC=./src/
+PROJ_SCRIPTS=./scripts/
 
 all: build-jputils build-jpclient build-jpserver
 
@@ -19,9 +20,12 @@ build-jpserver: build-jputils
 	$(JAVAC) -d $(PROJ_BIN) -cp $(PROJ_BIN) $(PROJ_SRC)jpserver/*.java
 
 run: all
-	$(TERM) -e ./runServer.sh &
-	$(TERM) -e ./runClientOrchestrator.sh &
+	$(TERM) -e $(PROJ_SCRIPTS)runServer.sh &
+	$(TERM) -e $(PROJ_SCRIPTS)runClientOrchestrator.sh &
 
 demo: all
-	$(TERM) -e ./runServer.sh &
-	$(TERM) -e ./runClientDemo.sh &
+	$(TERM) -e $(PROJ_SCRIPTS)runServer.sh &
+	$(TERM) -e $(PROJ_SCRIPTS)runClientDemo.sh &
+
+clean:
+	rm -r bin/*
