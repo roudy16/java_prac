@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.UUID;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -25,7 +26,7 @@ public class RequestHandler implements Runnable {
     @Override
     public final void run() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));)
+             PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);)
         {
             System.out.println("Processing request on ThreadID: " + Thread.currentThread().getName());
             final String reqContent = in.readLine();
@@ -39,12 +40,10 @@ public class RequestHandler implements Runnable {
                                       + " Err: " + Integer.toString(res.getErrCode()));
                 }
                 
-                writer.write(res.getResponse());
+                writer.println(res.getResponse());
             } else {
-                writer.write(ERROR + " content empty");
+                writer.println(ERROR + " content empty");
             }
-
-            writer.flush();
         }
         catch (IOException e) {
             System.out.println("I/O exception: " + e);

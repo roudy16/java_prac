@@ -6,13 +6,14 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import jputils.Constants;
+
 /** I used the code sample found in an Oracle tutorial on sockets
  * 
  *
  */
 
 public class Server {
-    private static final int PORT_NUMBER = 8008;
     private static final int NUM_WORKERS = 7;
 
     private static void run(int portNumber) {
@@ -24,6 +25,7 @@ public class Server {
 
             while (true) {
                 final Socket clientSocket = serverSocket.accept();
+                System.out.println("Client connected: " + clientSocket.getRemoteSocketAddress());
                 final Runnable worker = new RequestHandler(clientSocket);
                 executor.execute(worker);
             }
@@ -40,6 +42,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        run(PORT_NUMBER);
+        run(Constants.PORT);
     }
 }
