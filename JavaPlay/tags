@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ChangeWordFoo	.\src\RefTest.java	/^    private static Name ChangeWordFoo(Name word) {$/;"	m	class:RefTest	file:
+ChangeWordFoo	.\src\RefTest.java	/^    private static String ChangeWordFoo(String word) {$/;"	m	class:RefTest	file:
+LambaTest	.\src\LambaTest.java	/^public class LambaTest {$/;"	c
+Name	.\src\RefTest.java	/^        public Name(String name) {$/;"	m	class:RefTest.Name
+Name	.\src\RefTest.java	/^    private static class Name {$/;"	c	class:RefTest
+RefTest	.\src\RefTest.java	/^public class RefTest {$/;"	c
+UnaryStringOp	.\src\LambaTest.java	/^    interface UnaryStringOp {$/;"	i	class:LambaTest
+data	.\src\RefTest.java	/^        String data;$/;"	f	class:RefTest.Name
+main	.\src\LambaTest.java	/^    static public void main(String[] args) {$/;"	m	class:LambaTest
+main	.\src\RefTest.java	/^    public static void main(String[] args) {$/;"	m	class:RefTest
+op	.\src\LambaTest.java	/^        void op(String str);$/;"	m	interface:LambaTest.UnaryStringOp
+toString	.\src\RefTest.java	/^        public String toString() {$/;"	m	class:RefTest.Name
