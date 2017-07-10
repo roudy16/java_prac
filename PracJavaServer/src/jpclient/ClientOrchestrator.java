@@ -26,12 +26,12 @@ public final class ClientOrchestrator {
         clients = new LinkedHashMap<>();
         recycleIndices = new TreeSet<>();
         nextNewIndex = 0;
-        
+
         consoleInLines = new ConcurrentLinkedDeque<>();
         consoleThread = new ConsoleInputReaderThread(System.in);
         consoleThread.start();
     }
-    
+
 
     private static final String HOSTNAME = "localhost";
     private static final String PORT = Integer.toString(Constants.PORT);
@@ -395,11 +395,11 @@ public final class ClientOrchestrator {
             stdin.newLine();
             stdin.flush();
         }
-        
+
         private String getOutput() throws IOException {
             return Functions.readLine(stdout, sb);
         }
-        
+
         private void endProcess() {
             proc.destroyForcibly();
             state = ClientState.TERMINATED;
